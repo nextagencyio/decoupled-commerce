@@ -644,7 +644,53 @@ function printSuccessBox() {
   console.log('')
 }
 
+async function runShopifySetup() {
+  const shopifyConfig = await configureShopify()
+
+  if (shopifyConfig) {
+    // Check if products exist
+    const hasProducts = await checkShopifyProducts(shopifyConfig.storeDomain, shopifyConfig.storefrontToken)
+
+    if (hasProducts) {
+      success('Shopify store already has products - skipping seed')
+    } else if (shopifyConfig.adminToken) {
+      // Seed products
+      await seedShopifyProducts(shopifyConfig.storeDomain, shopifyConfig.adminToken)
+    } else {
+      warn('No products in store and no Admin API token provided.')
+      log('  To seed products, run setup again with an Admin API token,')
+      log('  or add products manually in Shopify Admin.')
+    }
+  }
+
+  return shopifyConfig
+}
+
 async function main() {
+  const args = process.argv.slice(2)
+  const shopifyOnly = args.includes('--shopify-only') || args.includes('--shopify')
+
+  if (shopifyOnly) {
+    // Shopify-only setup
+    console.log('')
+    console.log(`${colors.bold}${colors.magenta}╔════════════════════════════════════════════════════════╗${colors.reset}`)
+    console.log(`${colors.bold}${colors.magenta}║       Decoupled Commerce - Shopify Setup               ║${colors.reset}`)
+    console.log(`${colors.bold}${colors.magenta}╚════════════════════════════════════════════════════════╝${colors.reset}`)
+    console.log('')
+
+    try {
+      await runShopifySetup()
+      printSuccessBox()
+    } catch (err) {
+      error(`Shopify setup failed: ${err}`)
+      process.exit(1)
+    } finally {
+      rl.close()
+    }
+    return
+  }
+
+  // Full setup
   console.log('')
   console.log(`${colors.bold}${colors.magenta}╔════════════════════════════════════════════════════════╗${colors.reset}`)
   console.log(`${colors.bold}${colors.magenta}║       Decoupled Commerce - Setup Wizard                ║${colors.reset}`)
@@ -689,23 +735,7 @@ async function main() {
     // SHOPIFY SETUP
     // ========================================
 
-    const shopifyConfig = await configureShopify()
-
-    if (shopifyConfig) {
-      // Check if products exist
-      const hasProducts = await checkShopifyProducts(shopifyConfig.storeDomain, shopifyConfig.storefrontToken)
-
-      if (hasProducts) {
-        success('Shopify store already has products - skipping seed')
-      } else if (shopifyConfig.adminToken) {
-        // Seed products
-        await seedShopifyProducts(shopifyConfig.storeDomain, shopifyConfig.adminToken)
-      } else {
-        warn('No products in store and no Admin API token provided.')
-        log('  To seed products, run setup again with an Admin API token,')
-        log('  or add products manually in Shopify Admin.')
-      }
-    }
+    await runShopifySetup()
 
     printSuccessBox()
   } catch (err) {

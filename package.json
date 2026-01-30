@@ -13,6 +13,7 @@
     "start": "next start",
     "lint": "next lint",
     "setup": "tsx scripts/setup.ts",
+    "setup-shopify": "tsx scripts/setup.ts --shopify-only",
     "setup-content": "npx decoupled-cli@latest content import --file data/commerce-content.json",
     "setup-content:preview": "npx decoupled-cli@latest content import --file data/commerce-content.json --preview",
     "generate-schema": "tsx scripts/generate-schema.ts"
