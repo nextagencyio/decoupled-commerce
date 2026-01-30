@@ -1,0 +1,91 @@
+{
+  "model": [
+    {
+      "bundle": "article",
+      "label": "Blog Post",
+      "body": true,
+      "fields": [
+        {
+          "id": "featured_image",
+          "type": "image",
+          "label": "Featured Image"
+        },
+        {
+          "id": "category",
+          "type": "term(blog_categories)[]",
+          "label": "Category"
+        }
+      ]
+    },
+    {
+      "bundle": "page",
+      "label": "Page",
+      "body": true,
+      "fields": [
+        {
+          "id": "hero_image",
+          "type": "image",
+          "label": "Hero Image"
+        }
+      ]
+    }
+  ],
+  "taxonomies": [
+    {
+      "vid": "blog_categories",
+      "name": "Blog Categories",
+      "terms": [
+        { "name": "E-commerce Tips" },
+        { "name": "Product Updates" },
+        { "name": "Industry News" },
+        { "name": "Tutorials" }
+      ]
+    }
+  ],
+  "content": [
+    {
+      "type": "article",
+      "title": "5 Tips for Boosting Your Online Store Sales",
+      "body": "<p>Running a successful online store requires more than just listing products. Here are five proven strategies to increase your sales:</p><h2>1. Optimize Product Descriptions</h2><p>Write compelling, detailed product descriptions that highlight benefits, not just features. Include size guides, materials, and care instructions where relevant.</p><h2>2. Use High-Quality Images</h2><p>Invest in professional product photography. Show products from multiple angles and in context. Consider adding zoom functionality and 360-degree views.</p><h2>3. Streamline Checkout</h2><p>Reduce cart abandonment by simplifying your checkout process. Offer guest checkout, multiple payment options, and clear shipping information upfront.</p><h2>4. Leverage Social Proof</h2><p>Display customer reviews prominently. User-generated content builds trust and helps shoppers make confident purchasing decisions.</p><h2>5. Personalize the Experience</h2><p>Use browsing history and purchase data to recommend relevant products. Personalized experiences increase engagement and conversion rates.</p>",
+      "featured_image": {
+        "url": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=800&fit=crop",
+        "alt": "E-commerce shopping concept"
+      },
+      "category": ["E-commerce Tips"]
+    },
+    {
+      "type": "article",
+      "title": "The Rise of Headless Commerce: What You Need to Know",
+      "body": "<p>Headless commerce is revolutionizing how brands build online shopping experiences. But what exactly is it, and why should you care?</p><h2>What is Headless Commerce?</h2><p>Headless commerce separates the frontend presentation layer from the backend commerce functionality. This decoupled architecture gives brands complete control over their customer experience while leveraging powerful commerce platforms.</p><h2>Benefits of Going Headless</h2><ul><li><strong>Flexibility:</strong> Use any frontend technology to create unique experiences</li><li><strong>Performance:</strong> Faster page loads with static site generation</li><li><strong>Omnichannel:</strong> Deliver consistent experiences across web, mobile, and IoT</li><li><strong>Scalability:</strong> Handle traffic spikes without infrastructure concerns</li></ul><h2>Is Headless Right for You?</h2><p>Headless commerce is ideal for brands that want custom experiences, have development resources, and need to integrate multiple systems. This starter template demonstrates the power of combining Drupal CMS with Shopify commerce!</p>",
+      "featured_image": {
+        "url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop",
+        "alt": "Technology and commerce"
+      },
+      "category": ["Industry News", "Tutorials"]
+    },
+    {
+      "type": "article",
+      "title": "How to Write Product Descriptions That Sell",
+      "body": "<p>Great product descriptions can be the difference between a sale and an abandoned cart. Here's how to craft descriptions that convert.</p><h2>Know Your Audience</h2><p>Before writing, understand who you're selling to. What problems do they have? What language do they use? What benefits matter most to them?</p><h2>Focus on Benefits, Not Just Features</h2><p>Features tell, benefits sell. Instead of \"100% cotton,\" try \"Soft, breathable cotton that keeps you comfortable all day.\"</p><h2>Use Sensory Words</h2><p>Help customers imagine owning and using the product. Describe textures, sounds, and experiences they'll have.</p><h2>Keep It Scannable</h2><p>Use bullet points for key details, short paragraphs for narrative, and clear headings to break up text. Most shoppers scan before they read.</p><h2>Include Social Proof</h2><p>Reference how many customers love the product, include a brief testimonial, or mention awards and recognition.</p>",
+      "featured_image": {
+        "url": "https://images.unsplash.com/photo-1586880244406-556ebe35f282?w=1200&h=800&fit=crop",
+        "alt": "Writing and content creation"
+      },
+      "category": ["E-commerce Tips", "Tutorials"]
+    },
+    {
+      "type": "page",
+      "title": "About Us",
+      "body": "<p>Welcome to our store! We're passionate about bringing you the best products at great prices.</p><h2>Our Story</h2><p>Founded with a simple mission: to make quality products accessible to everyone. We carefully curate our selection to ensure every item meets our high standards.</p><h2>Our Values</h2><ul><li><strong>Quality:</strong> We never compromise on the products we offer</li><li><strong>Service:</strong> Your satisfaction is our top priority</li><li><strong>Sustainability:</strong> We're committed to reducing our environmental impact</li></ul><h2>Our Team</h2><p>We're a small, dedicated team who loves what we do. Every order is handled with care, and we're always here to help with any questions.</p>",
+      "hero_image": {
+        "url": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=600&fit=crop",
+        "alt": "Team working together"
+      }
+    },
+    {
+      "type": "page",
+      "title": "Contact",
+      "body": "<h2>Get in Touch</h2><p>We'd love to hear from you! Whether you have a question about an order, need product recommendations, or just want to say hello.</p><h3>Customer Support</h3><p>Email: support@example.com<br>Hours: Monday - Friday, 9am - 5pm EST</p><h3>General Inquiries</h3><p>Email: hello@example.com</p><h3>Address</h3><p>123 Commerce Street<br>New York, NY 10001<br>United States</p><p>We typically respond to all inquiries within 24 hours during business days.</p>"
+    }
+  ]
+}
