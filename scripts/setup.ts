@@ -102,9 +102,25 @@ async function checkAuth(): Promise<boolean> {
 
 async function login(): Promise<boolean> {
   heading('Login to Decoupled.io')
-  log('This will open a browser window for authentication.')
+  log('You need to authenticate with Decoupled.io first.')
+  log('')
+  const shouldAuth = await question('Open browser to authenticate? [Y/n] ')
+
+  if (shouldAuth.toLowerCase() === 'n') {
+    error('Authentication required to continue.')
+    return false
+  }
+
+  info('Opening browser for authentication...')
   const result = await runCommand('npx', ['decoupled-cli@latest', 'auth', 'login'])
-  return result.code === 0
+
+  if (result.code !== 0) {
+    return false
+  }
+
+  // Verify auth worked
+  const verified = await checkAuth()
+  return verified
 }
 
 async function selectOrCreateSpace(): Promise<number | null> {
@@ -371,7 +387,12 @@ async function configureShopify(): Promise<{ storeDomain: string; storefrontToke
   // Add Shopify vars
   envContent += `\n# Shopify Storefront API\n`
   envContent += `NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=${storeDomain}\n`
-  envContent += `SHOPIFY_STOREFRONT_ACCESS_TOKEN=${storefrontToken}\n`
+  envContent += `NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=${storefrontToken}\n`
+
+  if (adminToken) {
+    envContent += `\n# Shopify Admin API (for seeding products)\n`
+    envContent += `SHOPIFY_ADMIN_ACCESS_TOKEN=${adminToken}\n`
+  }
 
   fs.writeFileSync(envPath, envContent)
   success('Shopify credentials added to .env.local')
