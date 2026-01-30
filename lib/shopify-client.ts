@@ -1,5 +1,5 @@
 const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN!
-const storefrontAccessToken = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN!
+const storefrontAccessToken = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN!
 
 export async function shopifyFetch<T>({
   query,
@@ -45,7 +45,7 @@ export async function shopifyFetch<T>({
 export function isShopifyConfigured(): boolean {
   return !!(
     process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN &&
-    process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN
+    process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN
   )
 }
 
