@@ -84,6 +84,39 @@ function runCommand(
   })
 }
 
+async function waitForSpace(spaceId: number, maxWaitSeconds = 200): Promise<boolean> {
+  const startTime = Date.now()
+  const spinnerChars = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
+  let spinnerIdx = 0
+
+  process.stdout.write('\n')
+
+  while ((Date.now() - startTime) / 1000 < maxWaitSeconds) {
+    const elapsed = Math.floor((Date.now() - startTime) / 1000)
+    const spinner = spinnerChars[spinnerIdx % spinnerChars.length]
+    process.stdout.write(`\r${colors.cyan}${spinner}${colors.reset} Waiting for space to be ready... (${elapsed}s / ${maxWaitSeconds}s)`)
+    spinnerIdx++
+
+    // Silent status check
+    const result = await runCommand(
+      'npx',
+      ['decoupled-cli@latest', 'spaces', 'status', spaceId.toString()],
+      { silent: true }
+    )
+
+    // Check for "Ready: Yes" in the output
+    if (result.output.includes('Ready: Yes')) {
+      process.stdout.write(`\r${colors.green}✓${colors.reset} Space is ready!                                    \n`)
+      return true
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 5000))
+  }
+
+  process.stdout.write(`\r${colors.red}✗${colors.reset} Timeout waiting for space (${maxWaitSeconds}s)              \n`)
+  return false
+}
+
 async function checkCLI(): Promise<boolean> {
   info('Checking for decoupled-cli...')
   const result = await runCommand('npx', ['decoupled-cli@latest', '--version'], { silent: true })
@@ -188,38 +221,20 @@ async function selectOrCreateSpace(): Promise<number | null> {
 
   success(`Space created with ID: ${spaceId}`)
 
-  // Wait for provisioning
-  info('Waiting for space to be ready (this takes about 90 seconds)...')
-  let ready = false
-  let attempts = 0
-  const maxAttempts = 30
-
-  while (!ready && attempts < maxAttempts) {
-    await new Promise((resolve) => setTimeout(resolve, 5000))
-    attempts++
-
-    const statusResult = await runCommand(
-      'npx',
-      ['decoupled-cli@latest', 'spaces', 'status', spaceId.toString()],
-      { silent: true }
-    )
-
-    if (statusResult.output.includes('Ready: Yes')) {
-      ready = true
-    } else {
-      process.stdout.write('.')
-    }
-  }
+  // Wait for provisioning with spinner
+  info('New spaces take ~90 seconds to provision...')
+  const ready = await waitForSpace(spaceId)
 
   if (ready) {
-    console.log('')
-    success('Space is ready!')
     // Give OAuth client a few more seconds to be fully configured
     info('Waiting a few more seconds for OAuth setup...')
     await new Promise((resolve) => setTimeout(resolve, 10000))
   } else {
-    console.log('')
-    warn('Space provisioning is taking longer than expected. You may need to wait a bit more.')
+    warn('Space provisioning is taking longer than expected.')
+    const shouldContinue = await question('Continue anyway? [y/N] ')
+    if (shouldContinue.toLowerCase() !== 'y') {
+      return null
+    }
   }
 
   return spaceId
