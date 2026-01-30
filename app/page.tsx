@@ -138,6 +138,41 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Featured Products Section */}
+      {products.length > 0 && (
+        <section className="py-16 md:py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-end justify-between mb-10">
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Featured Products</h2>
+                <p className="text-gray-600 mt-2">Handpicked favorites from our collection</p>
+              </div>
+              <Link
+                href="/products"
+                className="hidden sm:flex items-center text-primary-600 hover:text-primary-700 font-semibold group"
+              >
+                View All
+                <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+            <div className="mt-8 text-center sm:hidden">
+              <Link
+                href="/products"
+                className="inline-flex items-center text-primary-600 font-semibold"
+              >
+                View All Products
+                <ArrowRight className="ml-1 w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Collections Section */}
       {collections.length > 0 && (
         <section className="py-16 md:py-20 bg-gray-50">
@@ -195,41 +230,6 @@ export default async function HomePage() {
                 className="inline-flex items-center text-primary-600 font-semibold"
               >
                 View All Collections
-                <ArrowRight className="ml-1 w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Featured Products Section */}
-      {products.length > 0 && (
-        <section className="py-16 md:py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-end justify-between mb-10">
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Featured Products</h2>
-                <p className="text-gray-600 mt-2">Handpicked favorites from our collection</p>
-              </div>
-              <Link
-                href="/products"
-                className="hidden sm:flex items-center text-primary-600 hover:text-primary-700 font-semibold group"
-              >
-                View All
-                <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-            <div className="mt-8 text-center sm:hidden">
-              <Link
-                href="/products"
-                className="inline-flex items-center text-primary-600 font-semibold"
-              >
-                View All Products
                 <ArrowRight className="ml-1 w-4 h-4" />
               </Link>
             </div>
