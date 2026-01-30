@@ -338,6 +338,21 @@ async function importDrupalContent(spaceId: number): Promise<void> {
   }
 }
 
+function cleanShopifyDomain(input: string): string {
+  let domain = input.trim()
+
+  // Remove protocol (https:// or http://)
+  domain = domain.replace(/^https?:\/\//i, '')
+
+  // Remove trailing slashes and paths
+  domain = domain.split('/')[0]
+
+  // Remove any query parameters
+  domain = domain.split('?')[0]
+
+  return domain
+}
+
 async function configureShopify(): Promise<{ storeDomain: string; storefrontToken: string; adminToken?: string } | null> {
   heading('Shopify Configuration')
 
@@ -352,10 +367,16 @@ async function configureShopify(): Promise<{ storeDomain: string; storefrontToke
   log(`${colors.dim}  3. Install the app and copy the Storefront API access token${colors.reset}`)
   log('')
 
-  const storeDomain = await question('Shopify store domain (e.g., my-store.myshopify.com): ')
-  if (!storeDomain) {
+  const rawStoreDomain = await question('Shopify store domain (e.g., my-store.myshopify.com): ')
+  if (!rawStoreDomain) {
     warn('Skipping Shopify configuration. You can add it later to .env.local')
     return null
+  }
+
+  // Clean up the domain (handle full URLs, trailing slashes, etc.)
+  const storeDomain = cleanShopifyDomain(rawStoreDomain)
+  if (storeDomain !== rawStoreDomain.trim()) {
+    info(`Using cleaned domain: ${storeDomain}`)
   }
 
   const storefrontToken = await question('Storefront API access token: ')
