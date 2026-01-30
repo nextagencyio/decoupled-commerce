@@ -171,7 +171,8 @@ npm run setup-content
 | `npm run dev` | Start development server |
 | `npm run build` | Build for production |
 | `npm run start` | Start production server |
-| `npm run setup` | Run interactive setup wizard |
+| `npm run setup` | Run interactive setup wizard (Drupal + Shopify) |
+| `npm run setup-shopify` | Run Shopify setup only (if main setup was interrupted) |
 | `npm run setup-content` | Import sample Drupal content |
 | `npm run lint` | Run ESLint |
 
