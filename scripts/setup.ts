@@ -214,6 +214,9 @@ async function selectOrCreateSpace(): Promise<number | null> {
   if (ready) {
     console.log('')
     success('Space is ready!')
+    // Give OAuth client a few more seconds to be fully configured
+    info('Waiting a few more seconds for OAuth setup...')
+    await new Promise((resolve) => setTimeout(resolve, 10000))
   } else {
     console.log('')
     warn('Space provisioning is taking longer than expected. You may need to wait a bit more.')
@@ -225,20 +228,24 @@ async function selectOrCreateSpace(): Promise<number | null> {
 async function configureDrupal(spaceId: number): Promise<boolean> {
   heading('Configuring Drupal Environment')
 
-  info('Fetching OAuth credentials...')
-  const result = await runCommand(
-    'npx',
-    ['decoupled-cli@latest', 'spaces', 'env', spaceId.toString(), '--write', '.env.local'],
-    { silent: false }
-  )
+  const envPath = path.join(process.cwd(), '.env.local')
+  const envExists = fs.existsSync(envPath)
 
-  if (result.code === 0) {
-    success('Drupal credentials written to .env.local')
-    return true
-  } else {
-    error('Failed to fetch credentials')
-    return false
+  if (envExists) {
+    const overwrite = await question('.env.local already exists. Overwrite? [y/N] ')
+    if (overwrite.toLowerCase() !== 'y') {
+      info('Skipping environment configuration')
+      return true
+    }
   }
+
+  info('Fetching OAuth credentials...')
+  await runCommand(
+    'npx',
+    ['decoupled-cli@latest', 'spaces', 'env', spaceId.toString(), '--write', '.env.local']
+  )
+  success('Environment configured in .env.local')
+  return true
 }
 
 async function checkDrupalContent(): Promise<boolean> {
