@@ -96,8 +96,9 @@ async function checkCLI(): Promise<boolean> {
 
 async function checkAuth(): Promise<boolean> {
   info('Checking authentication status...')
-  const result = await runCommand('npx', ['decoupled-cli@latest', 'auth', 'status'], { silent: true })
-  return result.output.includes('Logged in')
+  const result = await runCommand('npx', ['decoupled-cli@latest', 'auth', 'status', '2>&1'], { silent: true })
+  // CLI outputs "not authenticated" when logged out, otherwise shows user info
+  return result.code === 0 && !result.output.includes('not authenticated')
 }
 
 async function login(): Promise<boolean> {
