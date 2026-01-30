@@ -54,6 +54,48 @@ function question(prompt: string): Promise<string> {
   })
 }
 
+function secretQuestion(prompt: string): Promise<string> {
+  return new Promise((resolve) => {
+    process.stdout.write(`${colors.cyan}?${colors.reset} ${prompt}`)
+
+    const stdin = process.stdin
+    const wasRaw = stdin.isRaw
+    stdin.setRawMode(true)
+    stdin.resume()
+    stdin.setEncoding('utf8')
+
+    let input = ''
+    const onData = (char: string) => {
+      // Handle Ctrl+C
+      if (char === '\u0003') {
+        process.stdout.write('\n')
+        process.exit()
+      }
+      // Handle Enter
+      if (char === '\r' || char === '\n') {
+        stdin.removeListener('data', onData)
+        stdin.setRawMode(wasRaw)
+        process.stdout.write('\n')
+        resolve(input.trim())
+        return
+      }
+      // Handle Backspace
+      if (char === '\u007f' || char === '\b') {
+        if (input.length > 0) {
+          input = input.slice(0, -1)
+          process.stdout.write('\b \b')
+        }
+        return
+      }
+      // Regular character - show asterisk
+      input += char
+      process.stdout.write('*')
+    }
+
+    stdin.on('data', onData)
+  })
+}
+
 function runCommand(
   command: string,
   args: string[],
@@ -379,7 +421,7 @@ async function configureShopify(): Promise<{ storeDomain: string; storefrontToke
     info(`Using cleaned domain: ${storeDomain}`)
   }
 
-  const storefrontToken = await question('Storefront API access token: ')
+  const storefrontToken = await secretQuestion('Storefront API access token: ')
   if (!storefrontToken) {
     warn('Skipping Shopify configuration. You can add it later to .env.local')
     return null
@@ -413,7 +455,7 @@ async function configureShopify(): Promise<{ storeDomain: string; storefrontToke
 
   // Ask for Admin API token (optional)
   log('')
-  const adminToken = await question('Admin API access token (optional, for seeding products - press Enter to skip): ')
+  const adminToken = await secretQuestion('Admin API access token (optional, for seeding products - press Enter to skip): ')
 
   // Append to .env.local
   const envPath = path.join(process.cwd(), '.env.local')
