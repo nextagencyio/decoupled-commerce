@@ -299,22 +299,20 @@ async function checkDrupalContent(): Promise<boolean> {
   }
 }
 
-async function importDrupalContent(): Promise<void> {
+async function importDrupalContent(spaceId: number): Promise<void> {
   heading('Import Drupal Content')
 
-  const hasContent = await checkDrupalContent()
-
-  if (hasContent) {
-    success('Drupal already has content - skipping import')
-    return
-  }
-
   info('Importing sample blog content...')
-  const result = await runCommand('npm', ['run', 'setup-content'])
+  // Use --space flag to import via dashboard API (more reliable than OAuth)
+  const result = await runCommand(
+    'npx',
+    ['decoupled-cli@latest', 'content', 'import', '--space', spaceId.toString(), '--file', 'data/commerce-content.json']
+  )
   if (result.code === 0) {
     success('Sample content imported successfully!')
   } else {
-    warn('Content import had some issues. You can try again with: npm run setup-content')
+    warn('Content import had some issues. You can try again with:')
+    log(`  npx decoupled-cli@latest content import --space ${spaceId} --file data/commerce-content.json`)
   }
 }
 
@@ -660,7 +658,7 @@ async function main() {
     const spaceId = await selectOrCreateSpace()
     if (spaceId) {
       await configureDrupal(spaceId)
-      await importDrupalContent()
+      await importDrupalContent(spaceId)
     } else {
       warn('Skipping Drupal configuration')
     }
