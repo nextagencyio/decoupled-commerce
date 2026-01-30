@@ -129,7 +129,7 @@ DRUPAL_REVALIDATE_SECRET=your-random-secret
 
 ```env
 NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=your-store.myshopify.com
-SHOPIFY_STOREFRONT_ACCESS_TOKEN=your-storefront-token
+NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=your-storefront-token
 ```
 
 ### 4. Import Content

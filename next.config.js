@@ -2,9 +2,15 @@
 const nextConfig = {
   images: {
     remotePatterns: [
-      // Drupal images
+      // Drupal images (https)
       {
         protocol: 'https',
+        hostname: '**.decoupled.website',
+        pathname: '/**',
+      },
+      // Drupal images (http - for local dev)
+      {
+        protocol: 'http',
         hostname: '**.decoupled.website',
         pathname: '/**',
       },
