@@ -154,11 +154,8 @@ async function selectOrCreateSpace(): Promise<number | null> {
   }
 
   // Create new space
-  const spaceName = await question('Enter a name for your new Drupal space: ')
-  if (!spaceName) {
-    error('Space name is required')
-    return null
-  }
+  const defaultName = 'My Store'
+  const spaceName = await question(`Enter a name for your new Drupal space (${defaultName}): `) || defaultName
 
   log('')
   info(`Creating space "${spaceName}"...`)
