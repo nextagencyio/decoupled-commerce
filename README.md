@@ -2,6 +2,8 @@
 
 A hybrid e-commerce starter combining **Drupal CMS** for content management with **Shopify** for commerce functionality.
 
+![Decoupled Commerce Screenshot](screenshot.png)
+
 ## Architecture
 
 ```
