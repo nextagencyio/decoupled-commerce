@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { isDemoMode, handleMockQuery } from '@/lib/demo-mode'
 
 const DRUPAL_BASE_URL = process.env.NEXT_PUBLIC_DRUPAL_BASE_URL
 const CLIENT_ID = process.env.DRUPAL_CLIENT_ID
@@ -46,6 +47,17 @@ async function getAccessToken(): Promise<string | null> {
 }
 
 export async function POST(request: NextRequest) {
+  // Demo mode: return mock data for blog content
+  if (isDemoMode()) {
+    try {
+      const body = await request.text()
+      const mockResponse = handleMockQuery(body)
+      return NextResponse.json(mockResponse)
+    } catch (error) {
+      return NextResponse.json({ data: {}, errors: [{ message: 'Mock data error' }] })
+    }
+  }
+
   if (!DRUPAL_BASE_URL) {
     return NextResponse.json(
       { error: 'Drupal not configured' },

@@ -5,6 +5,8 @@ import { CartProvider } from '@/lib/cart-context'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import CartDrawer from './components/CartDrawer'
+// DEMO MODE: Remove this import and <DemoModeBanner /> below for production-only builds
+import { DemoModeBanner } from './components/DemoModeBanner'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <DemoModeBanner />
         <CartProvider>
           <div className="min-h-screen flex flex-col">
             <Header />

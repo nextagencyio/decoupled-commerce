@@ -218,6 +218,40 @@ Edit `data/commerce-content.json` to add new content types, then run:
 npm run setup-content
 ```
 
+## Demo Mode
+
+Demo mode allows you to showcase the application without connecting to Shopify or Drupal backends. It displays mock products, collections, and blog content.
+
+### Enable Demo Mode
+
+Set the environment variable:
+
+```bash
+NEXT_PUBLIC_DEMO_MODE=true
+```
+
+Or add to `.env.local`:
+```
+NEXT_PUBLIC_DEMO_MODE=true
+```
+
+### What Demo Mode Does
+
+- Shows a "Demo Mode" banner at the top of the page
+- Returns mock products and collections (no Shopify required)
+- Returns mock blog posts (no Drupal required)
+- Cart functionality is disabled in demo mode
+
+### Removing Demo Mode
+
+To convert to a production app with real data:
+
+1. Delete `lib/demo-mode.ts`
+2. Delete `data/mock/` directory
+3. Delete `app/components/DemoModeBanner.tsx`
+4. Remove `DemoModeBanner` import and usage from `app/layout.tsx`
+5. Remove demo mode checks from `app/page.tsx` and `app/api/graphql/route.ts`
+
 ## Deployment
 
 ### Vercel (Recommended)
@@ -226,6 +260,8 @@ npm run setup-content
 2. Import in Vercel
 3. Add environment variables
 4. Deploy
+
+Set `NEXT_PUBLIC_DEMO_MODE=true` in Vercel environment variables for a demo deployment.
 
 ### Other Platforms
 

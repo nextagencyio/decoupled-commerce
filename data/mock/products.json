@@ -1,0 +1,300 @@
+{
+  "products": [
+    {
+      "id": "gid://shopify/Product/1",
+      "title": "Classic Cotton T-Shirt",
+      "handle": "classic-cotton-tshirt",
+      "description": "A comfortable everyday essential made from 100% organic cotton. Soft, breathable, and sustainably sourced.",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "29.99",
+          "currencyCode": "USD"
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80",
+              "altText": "Classic Cotton T-Shirt"
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/1",
+              "title": "Small / White",
+              "availableForSale": true,
+              "priceV2": {
+                "amount": "29.99",
+                "currencyCode": "USD"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/2",
+      "title": "Leather Crossbody Bag",
+      "handle": "leather-crossbody-bag",
+      "description": "Handcrafted from premium full-grain leather. Features adjustable strap and brass hardware.",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "149.99",
+          "currencyCode": "USD"
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80",
+              "altText": "Leather Crossbody Bag"
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/2",
+              "title": "Brown",
+              "availableForSale": true,
+              "priceV2": {
+                "amount": "149.99",
+                "currencyCode": "USD"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/3",
+      "title": "Minimalist Watch",
+      "handle": "minimalist-watch",
+      "description": "Japanese quartz movement with a clean, modern dial. Water-resistant to 50m.",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "199.99",
+          "currencyCode": "USD"
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80",
+              "altText": "Minimalist Watch"
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/3",
+              "title": "Silver / Black Leather",
+              "availableForSale": true,
+              "priceV2": {
+                "amount": "199.99",
+                "currencyCode": "USD"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/4",
+      "title": "Wireless Earbuds Pro",
+      "handle": "wireless-earbuds-pro",
+      "description": "Premium audio with active noise cancellation. 24-hour battery life with charging case.",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "129.99",
+          "currencyCode": "USD"
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&q=80",
+              "altText": "Wireless Earbuds Pro"
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/4",
+              "title": "Matte Black",
+              "availableForSale": true,
+              "priceV2": {
+                "amount": "129.99",
+                "currencyCode": "USD"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/5",
+      "title": "Ceramic Planter Set",
+      "handle": "ceramic-planter-set",
+      "description": "Set of 3 handmade ceramic planters in varying sizes. Includes drainage holes and saucers.",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "59.99",
+          "currencyCode": "USD"
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=800&q=80",
+              "altText": "Ceramic Planter Set"
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/5",
+              "title": "Terracotta",
+              "availableForSale": true,
+              "priceV2": {
+                "amount": "59.99",
+                "currencyCode": "USD"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/6",
+      "title": "Premium Yoga Mat",
+      "handle": "premium-yoga-mat",
+      "description": "Extra-thick eco-friendly yoga mat with alignment markers. Non-slip surface for all styles.",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "79.99",
+          "currencyCode": "USD"
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=800&q=80",
+              "altText": "Premium Yoga Mat"
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/6",
+              "title": "Ocean Blue",
+              "availableForSale": true,
+              "priceV2": {
+                "amount": "79.99",
+                "currencyCode": "USD"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/7",
+      "title": "Artisan Coffee Beans",
+      "handle": "artisan-coffee-beans",
+      "description": "Single-origin Ethiopian beans, medium roast. Notes of blueberry, chocolate, and citrus.",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "18.99",
+          "currencyCode": "USD"
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=800&q=80",
+              "altText": "Artisan Coffee Beans"
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/7",
+              "title": "12oz Bag",
+              "availableForSale": true,
+              "priceV2": {
+                "amount": "18.99",
+                "currencyCode": "USD"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8",
+      "title": "Linen Throw Blanket",
+      "handle": "linen-throw-blanket",
+      "description": "Luxuriously soft stonewashed linen. Perfect for adding texture to any room.",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "89.99",
+          "currencyCode": "USD"
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80",
+              "altText": "Linen Throw Blanket"
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/8",
+              "title": "Natural Beige",
+              "availableForSale": true,
+              "priceV2": {
+                "amount": "89.99",
+                "currencyCode": "USD"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

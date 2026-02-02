@@ -6,8 +6,14 @@ import { GET_PRODUCTS, GET_COLLECTIONS } from '@/lib/shopify-queries'
 import { ShopifyProduct, ShopifyCollection } from '@/lib/types'
 import ProductCard from './components/ProductCard'
 import SetupGuide from './components/SetupGuide'
+import { isDemoMode, getMockProducts, getMockCollections } from '@/lib/demo-mode'
 
 async function getFeaturedProducts() {
+  // Demo mode: return mock products
+  if (isDemoMode()) {
+    return getMockProducts(8)
+  }
+
   if (!isShopifyConfigured()) return []
 
   try {
@@ -26,6 +32,11 @@ async function getFeaturedProducts() {
 }
 
 async function getCollections() {
+  // Demo mode: return mock collections
+  if (isDemoMode()) {
+    return getMockCollections(4)
+  }
+
   if (!isShopifyConfigured()) return []
 
   try {
@@ -72,7 +83,7 @@ export default async function HomePage() {
     getCollections(),
   ])
 
-  const shopifyConfigured = isShopifyConfigured()
+  const shopifyConfigured = isShopifyConfigured() || isDemoMode()
 
   if (!shopifyConfigured) {
     return <SetupGuide />

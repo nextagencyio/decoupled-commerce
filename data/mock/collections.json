@@ -1,0 +1,56 @@
+{
+  "collections": [
+    {
+      "id": "gid://shopify/Collection/1",
+      "title": "New Arrivals",
+      "handle": "new-arrivals",
+      "description": "Fresh finds and trending styles just landed in store.",
+      "image": {
+        "url": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80",
+        "altText": "New Arrivals Collection"
+      },
+      "products": {
+        "edges": []
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/2",
+      "title": "Best Sellers",
+      "handle": "best-sellers",
+      "description": "Our most popular products loved by customers.",
+      "image": {
+        "url": "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&q=80",
+        "altText": "Best Sellers Collection"
+      },
+      "products": {
+        "edges": []
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/3",
+      "title": "Home & Living",
+      "handle": "home-living",
+      "description": "Beautiful pieces to elevate your living space.",
+      "image": {
+        "url": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80",
+        "altText": "Home & Living Collection"
+      },
+      "products": {
+        "edges": []
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/4",
+      "title": "Accessories",
+      "handle": "accessories",
+      "description": "Complete your look with our curated accessories.",
+      "image": {
+        "url": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80",
+        "altText": "Accessories Collection"
+      },
+      "products": {
+        "edges": []
+      }
+    }
+  ]
+}
