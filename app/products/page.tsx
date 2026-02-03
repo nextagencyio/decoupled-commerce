@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { shopifyFetch, isShopifyConfigured } from '@/lib/shopify-client'
 import { GET_PRODUCTS } from '@/lib/shopify-queries'
 import { ShopifyProduct } from '@/lib/types'
+import { isDemoMode, getMockProducts } from '@/lib/demo-mode'
 import ProductCard from '../components/ProductCard'
 import SetupGuide from '../components/SetupGuide'
 
@@ -11,6 +12,11 @@ export const metadata: Metadata = {
 }
 
 async function getProducts() {
+  // Demo mode: return mock products
+  if (isDemoMode()) {
+    return getMockProducts(50)
+  }
+
   if (!isShopifyConfigured()) return []
 
   try {
@@ -29,7 +35,7 @@ async function getProducts() {
 }
 
 export default async function ProductsPage() {
-  if (!isShopifyConfigured()) {
+  if (!isShopifyConfigured() && !isDemoMode()) {
     return <SetupGuide />
   }
 

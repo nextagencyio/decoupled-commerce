@@ -6,6 +6,7 @@ import { ChevronRight } from 'lucide-react'
 import { shopifyFetch, isShopifyConfigured } from '@/lib/shopify-client'
 import { GET_COLLECTION_BY_HANDLE, GET_COLLECTIONS } from '@/lib/shopify-queries'
 import { ShopifyCollection, ShopifyProduct } from '@/lib/types'
+import { isDemoMode, getMockCollectionByHandle, getMockCollections } from '@/lib/demo-mode'
 import ProductCard from '../../components/ProductCard'
 
 interface Props {
@@ -13,6 +14,11 @@ interface Props {
 }
 
 async function getCollection(handle: string): Promise<ShopifyCollection | null> {
+  // Demo mode: return mock collection
+  if (isDemoMode()) {
+    return getMockCollectionByHandle(handle)
+  }
+
   if (!isShopifyConfigured()) return null
 
   try {
@@ -50,6 +56,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
+  // Demo mode: return mock collection handles
+  if (isDemoMode()) {
+    return getMockCollections(50).map(c => ({ handle: c.handle }))
+  }
+
   if (!isShopifyConfigured()) return []
 
   try {
@@ -72,7 +83,7 @@ export async function generateStaticParams() {
 export default async function CollectionPage({ params }: Props) {
   const { handle } = await params
 
-  if (!isShopifyConfigured()) {
+  if (!isShopifyConfigured() && !isDemoMode()) {
     notFound()
   }
 

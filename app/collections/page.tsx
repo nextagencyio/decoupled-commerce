@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { shopifyFetch, isShopifyConfigured } from '@/lib/shopify-client'
 import { GET_COLLECTIONS } from '@/lib/shopify-queries'
 import { ShopifyCollection } from '@/lib/types'
+import { isDemoMode, getMockCollections } from '@/lib/demo-mode'
 import SetupGuide from '../components/SetupGuide'
 
 export const metadata: Metadata = {
@@ -12,6 +13,11 @@ export const metadata: Metadata = {
 }
 
 async function getCollections() {
+  // Demo mode: return mock collections
+  if (isDemoMode()) {
+    return getMockCollections(50)
+  }
+
   if (!isShopifyConfigured()) return []
 
   try {
@@ -30,7 +36,7 @@ async function getCollections() {
 }
 
 export default async function CollectionsPage() {
-  if (!isShopifyConfigured()) {
+  if (!isShopifyConfigured() && !isDemoMode()) {
     return <SetupGuide />
   }
 

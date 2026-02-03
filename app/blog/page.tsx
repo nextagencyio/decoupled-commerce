@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { apolloClient, isDrupalConfigured } from '@/lib/apollo-client'
 import { GET_ARTICLES } from '@/lib/drupal-queries'
 import { DrupalArticle } from '@/lib/types'
+import { isDemoMode, getMockBlogPosts } from '@/lib/demo-mode'
 import ArticleCard from '../components/ArticleCard'
 
 export const metadata: Metadata = {
@@ -12,6 +13,11 @@ export const metadata: Metadata = {
 }
 
 async function getArticles(): Promise<DrupalArticle[]> {
+  // Demo mode: return mock blog posts
+  if (isDemoMode()) {
+    return getMockBlogPosts(20) as DrupalArticle[]
+  }
+
   if (!isDrupalConfigured()) return []
 
   try {
@@ -38,7 +44,7 @@ async function getArticles(): Promise<DrupalArticle[]> {
 }
 
 export default async function BlogPage() {
-  const drupalConfigured = isDrupalConfigured()
+  const drupalConfigured = isDrupalConfigured() || isDemoMode()
   const articles = await getArticles()
 
   if (!drupalConfigured) {

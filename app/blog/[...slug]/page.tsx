@@ -6,12 +6,30 @@ import { Calendar, ArrowLeft } from 'lucide-react'
 import { apolloClient, isDrupalConfigured } from '@/lib/apollo-client'
 import { GET_ARTICLE_BY_PATH, GET_ALL_ARTICLE_PATHS } from '@/lib/drupal-queries'
 import { DrupalArticle } from '@/lib/types'
+import { isDemoMode, getMockBlogPostBySlug, getMockBlogPosts } from '@/lib/demo-mode'
 
 interface Props {
   params: Promise<{ slug: string[] }>
 }
 
 async function getArticle(path: string): Promise<DrupalArticle | null> {
+  // Demo mode: return mock article
+  if (isDemoMode()) {
+    const slug = path.replace(/^\/blog\//, '')
+    const post = getMockBlogPostBySlug(slug)
+    if (!post) return null
+    return {
+      id: post.id,
+      title: post.title,
+      path: post.path,
+      created: post.created?.timestamp,
+      body: {
+        processed: post.body?.processed || '',
+      },
+      featuredImage: post.featuredImage,
+    }
+  }
+
   if (!isDrupalConfigured()) return null
 
   try {
@@ -61,6 +79,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
+  // Demo mode: return mock blog post slugs
+  if (isDemoMode()) {
+    return getMockBlogPosts(100).map((post: any) => {
+      const pathWithoutBlog = post.path.replace(/^\/blog\//, '/')
+      return {
+        slug: pathWithoutBlog.split('/').filter(Boolean),
+      }
+    })
+  }
+
   if (!isDrupalConfigured()) return []
 
   try {
@@ -85,7 +113,7 @@ export default async function ArticlePage({ params }: Props) {
   const { slug } = await params
   const path = '/blog/' + slug.join('/')
 
-  if (!isDrupalConfigured()) {
+  if (!isDrupalConfigured() && !isDemoMode()) {
     notFound()
   }
 

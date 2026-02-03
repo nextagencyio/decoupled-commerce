@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { shopifyFetch, isShopifyConfigured, formatPrice } from '@/lib/shopify-client'
 import { GET_PRODUCT_BY_HANDLE, GET_PRODUCTS } from '@/lib/shopify-queries'
 import { ShopifyProduct } from '@/lib/types'
+import { isDemoMode, getMockProductByHandle, getMockProducts } from '@/lib/demo-mode'
 import ProductDetail from './ProductDetail'
 
 interface Props {
@@ -10,6 +11,11 @@ interface Props {
 }
 
 async function getProduct(handle: string): Promise<ShopifyProduct | null> {
+  // Demo mode: return mock product
+  if (isDemoMode()) {
+    return getMockProductByHandle(handle)
+  }
+
   if (!isShopifyConfigured()) return null
 
   try {
@@ -47,6 +53,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
+  // Demo mode: return mock product handles
+  if (isDemoMode()) {
+    return getMockProducts(100).map(p => ({ handle: p.handle }))
+  }
+
   if (!isShopifyConfigured()) return []
 
   try {
@@ -69,7 +80,7 @@ export async function generateStaticParams() {
 export default async function ProductPage({ params }: Props) {
   const { handle } = await params
 
-  if (!isShopifyConfigured()) {
+  if (!isShopifyConfigured() && !isDemoMode()) {
     notFound()
   }
 
