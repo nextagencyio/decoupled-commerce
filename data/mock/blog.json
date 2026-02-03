@@ -14,8 +14,7 @@
         "processed": "<p>As we welcome the new season, it's time to refresh your wardrobe with the latest trends. This spring, we're seeing a beautiful blend of comfort and style that reflects our evolving lifestyles.</p><h2>1. Sustainable Fashion Forward</h2><p>Eco-conscious materials are no longer just a trend—they're the new standard. Look for pieces made from organic cotton, recycled materials, and innovative plant-based fabrics.</p><h2>2. Bold Colors Return</h2><p>After years of muted palettes, spring 2026 brings back vibrant colors. Think electric blue, sunny yellow, and rich coral tones that brighten any outfit.</p><h2>3. Versatile Layering</h2><p>The key to spring dressing is mastering the art of layering. Lightweight jackets, cardigans, and versatile pieces that work from day to night.</p>",
         "summary": "Discover the top fashion trends shaping spring 2026, from sustainable materials to bold color palettes."
       },
-      "image": {
-        "__typename": "Image",
+      "featuredImage": {
         "url": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&q=80",
         "alt": "Spring 2026 Style Guide"
       },
@@ -40,8 +39,7 @@
         "processed": "<p>Minimalism isn't about having less—it's about making room for more of what matters. Here's how to transform your living space into a calm, intentional sanctuary.</p><h2>Start with a Clean Slate</h2><p>Begin by decluttering one room at a time. Ask yourself: does this item serve a purpose or bring joy? If not, it might be time to let it go.</p><h2>Choose Quality Over Quantity</h2><p>Invest in well-made pieces that will last. A few beautiful, functional items are better than many disposable ones.</p><h2>Embrace Empty Space</h2><p>Don't feel the need to fill every corner. Empty space creates visual calm and allows your carefully chosen pieces to shine.</p>",
         "summary": "Transform your living space into a calm, intentional sanctuary with these minimalist design principles."
       },
-      "image": {
-        "__typename": "Image",
+      "featuredImage": {
         "url": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80",
         "alt": "Minimalist Home Interior"
       },
@@ -66,8 +64,7 @@
         "processed": "<p>Thoughtful gift-giving is an art that deepens connections and creates lasting memories. Here's how to choose gifts that truly resonate.</p><h2>Listen Throughout the Year</h2><p>The best gift ideas come from paying attention. Note when someone mentions something they'd love or a hobby they want to explore.</p><h2>Experience Over Things</h2><p>Sometimes the most memorable gifts are experiences—a cooking class, concert tickets, or a spa day can create stories that last a lifetime.</p><h2>Presentation Matters</h2><p>Beautiful wrapping shows care and builds anticipation. Consider reusable gift wrap options that are both elegant and sustainable.</p>",
         "summary": "Master the art of thoughtful gift-giving with tips for choosing meaningful presents that create lasting memories."
       },
-      "image": {
-        "__typename": "Image",
+      "featuredImage": {
         "url": "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=800&q=80",
         "alt": "Beautifully Wrapped Gifts"
       },

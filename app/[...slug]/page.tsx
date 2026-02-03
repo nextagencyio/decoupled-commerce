@@ -4,12 +4,18 @@ import Image from 'next/image'
 import { apolloClient, isDrupalConfigured } from '@/lib/apollo-client'
 import { GET_PAGE_BY_PATH, GET_ALL_PAGE_PATHS } from '@/lib/drupal-queries'
 import { DrupalPage } from '@/lib/types'
+import { isDemoMode, getMockPageByPath, getMockPages } from '@/lib/demo-mode'
 
 interface Props {
   params: Promise<{ slug: string[] }>
 }
 
 async function getPage(path: string): Promise<DrupalPage | null> {
+  // Demo mode: return mock page
+  if (isDemoMode()) {
+    return getMockPageByPath(path)
+  }
+
   if (!isDrupalConfigured()) return null
 
   try {
@@ -58,6 +64,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
+  // Demo mode: return mock page paths
+  if (isDemoMode()) {
+    return getMockPages().map(p => ({
+      slug: p.path.split('/').filter(Boolean),
+    }))
+  }
+
   if (!isDrupalConfigured()) return []
 
   try {
@@ -84,7 +97,7 @@ export default async function CatchAllPage({ params }: Props) {
     notFound()
   }
 
-  if (!isDrupalConfigured()) {
+  if (!isDrupalConfigured() && !isDemoMode()) {
     notFound()
   }
 

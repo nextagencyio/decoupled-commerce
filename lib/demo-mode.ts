@@ -14,8 +14,9 @@
 import productsData from '@/data/mock/products.json'
 import collectionsData from '@/data/mock/collections.json'
 import blogData from '@/data/mock/blog.json'
+import pagesData from '@/data/mock/pages.json'
 
-import { ShopifyProduct, ShopifyCollection } from './types'
+import { ShopifyProduct, ShopifyCollection, DrupalPage } from './types'
 
 /**
  * Check if demo mode is enabled via environment variable
@@ -29,6 +30,7 @@ const mockDataMap: Record<string, any> = {
   'products.json': productsData,
   'collections.json': collectionsData,
   'blog.json': blogData,
+  'pages.json': pagesData,
 }
 
 function loadMockData(filename: string): any {
@@ -81,6 +83,22 @@ export function getMockBlogPosts(first: number = 10): any[] {
 export function getMockBlogPostBySlug(slug: string): any | null {
   const posts = getMockBlogPosts(100)
   return posts.find(p => p.path === `/blog/${slug}` || p.slug === slug) || null
+}
+
+/**
+ * Get mock pages for demo mode
+ */
+export function getMockPages(): DrupalPage[] {
+  const data = loadMockData('pages.json')
+  return (data?.pages || []) as DrupalPage[]
+}
+
+/**
+ * Get mock page by path
+ */
+export function getMockPageByPath(path: string): DrupalPage | null {
+  const pages = getMockPages()
+  return pages.find(p => p.path === path) || null
 }
 
 /**
