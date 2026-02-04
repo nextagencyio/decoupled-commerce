@@ -6,7 +6,17 @@ import { GET_PRODUCTS, GET_COLLECTIONS } from '@/lib/shopify-queries'
 import { ShopifyProduct, ShopifyCollection } from '@/lib/types'
 import ProductCard from './components/ProductCard'
 import SetupGuide from './components/SetupGuide'
+import AlmostThere from './components/AlmostThere'
 import { isDemoMode, getMockProducts, getMockCollections } from '@/lib/demo-mode'
+
+// Check if Drupal is configured
+function isDrupalConfigured(): boolean {
+  return !!(
+    process.env.NEXT_PUBLIC_DRUPAL_BASE_URL &&
+    process.env.DRUPAL_CLIENT_ID &&
+    process.env.DRUPAL_CLIENT_SECRET
+  )
+}
 
 async function getFeaturedProducts() {
   // Demo mode: return mock products
@@ -86,6 +96,11 @@ export default async function HomePage() {
   const shopifyConfigured = isShopifyConfigured() || isDemoMode()
 
   if (!shopifyConfigured) {
+    // Show "Almost There" if Drupal is configured but Shopify isn't
+    if (isDrupalConfigured()) {
+      return <AlmostThere />
+    }
+    // Show full setup guide if nothing is configured
     return <SetupGuide />
   }
 
