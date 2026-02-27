@@ -1,8 +1,15 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 
+const isServer = typeof window === 'undefined'
+
 const httpLink = createHttpLink({
   uri: `${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/graphql`,
+  // On the server, tag fetch requests so revalidateTag('drupal') clears the Data Cache
+  ...(isServer && {
+    fetch: (uri: RequestInfo | URL, options?: RequestInit) =>
+      fetch(uri, { ...options, next: { tags: ['drupal'] } } as RequestInit),
+  }),
 })
 
 // OAuth token fetching for authenticated requests
