@@ -16,7 +16,8 @@
     "setup-shopify": "tsx scripts/setup.ts --shopify-only",
     "setup-content": "npx decoupled-cli@latest content import --file data/commerce-content.json",
     "setup-content:preview": "npx decoupled-cli@latest content import --file data/commerce-content.json --preview",
-    "generate-schema": "tsx scripts/generate-schema.ts"
+    "generate-schema": "tsx scripts/generate-schema.ts",
+    "build:cloudflare": "opennextjs-cloudflare build"
   },
   "dependencies": {
     "@apollo/client": "^3.13.9",
@@ -30,6 +31,7 @@
     "react-dom": "^19.1.1"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.17.1",
     "@types/node": "^22",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
@@ -40,6 +42,7 @@
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.17",
     "tsx": "^4.20.4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.71.0"
   }
 }
